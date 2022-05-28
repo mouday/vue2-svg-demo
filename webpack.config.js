@@ -14,11 +14,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist',
+    publicPath: '/vue2-svg-demo/dist',
     clean: true,
   },
 
-  //
+  // 外部加载
   externals: {
     vue: 'Vue',
   },
