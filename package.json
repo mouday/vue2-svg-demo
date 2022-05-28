@@ -2,7 +2,7 @@
 	"scripts": {
 		"build": "cross-env NODE_ENV=production  webpack --config webpack.config.js",
 		"dev": "cross-env NODE_ENV=development webpack serve --config webpack.config.js",
-		"start": "http-server dist -o /"
+		"start": "http-server ./ -o /dist/index.html"
 	},
 	"devDependencies": {
 		"copy-webpack-plugin": "^11.0.0",
