@@ -58,7 +58,7 @@ module.exports = {
 
 定义 Vue 组件
 
-```vue
+```html
 <!-- src/icons/SvgIcon.vue -->
 <template>
   <svg class="svg-icon" aria-hidden="true">
@@ -133,7 +133,7 @@ Vue.use(SvgIcon);
 
 完整代码：[https://github.com/mouday/vue2-svg-demo](https://github.com/mouday/vue2-svg-demo)
 
-在线 demo: [https://mouday.github.io/vue2-svg-demo/](https://mouday.github.io/vue2-svg-demo/)
+在线 demo: [https://mouday.github.io/vue2-svg-demo/dist/](https://mouday.github.io/vue2-svg-demo/dist//)
 
 参考：
 
