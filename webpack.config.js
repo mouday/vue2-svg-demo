@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/vue2-svg-demo/dist',
+    publicPath: process.env.NODE_ENV == 'production' ? '/vue2-svg-demo/dist': '/',
     clean: true,
   },
 
@@ -28,11 +28,28 @@ module.exports = {
       // 处理svg图标
       {
         test: /\.svg$/,
-        loader: 'svg-sprite-loader',
         include: [path.resolve('./src/icons/svg')],
-        options: {
-          symbolId: 'icon-[name]',
-        },
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              symbolId: 'icon-[name]',
+            },
+          },
+          // 移除svg的fill属性
+          {
+            loader: 'svgo-loader',
+            options: {
+              // 必须指定name！
+              plugins: [
+                {
+                  name: 'removeAttrs',
+                  params: { attrs: 'fill' },
+                },
+              ],
+            },
+          },
+        ],
       },
       // 处理vue文件
       {

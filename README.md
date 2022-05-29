@@ -26,7 +26,7 @@ $ tree -I node_modules
 依赖
 
 ```
-npm i svg-sprite-loader -D
+npm i svg-sprite-loader svgo-loader -D
 ```
 
 webpack 配置
@@ -41,15 +41,28 @@ module.exports = {
       // 处理svg图标
       {
         test: /\.svg$/,
-        loader: 'svg-sprite-loader',
-
-        include: [
-          // 指定svg图标的路径
-          path.resolve('./src/icons/svg'),
+        include: [path.resolve('./src/icons/svg')],
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              symbolId: 'icon-[name]',
+            },
+          },
+          // 移除svg的fill属性
+          {
+            loader: 'svgo-loader',
+            options: {
+              // 必须指定name！
+              plugins: [
+                {
+                  name: 'removeAttrs',
+                  params: { attrs: 'fill' },
+                },
+              ],
+            },
+          },
         ],
-        options: {
-          symbolId: 'icon-[name]',
-        },
       },
     ],
   },
@@ -139,3 +152,4 @@ Vue.use(SvgIcon);
 
 - [【vue】webpack 插件 svg-sprite-loader---实现自己的 icon 组件 ](https://www.cnblogs.com/teemor/p/9565841.html)
 - [手摸手，带你优雅的使用 icon](https://juejin.cn/post/6844903517564436493)
+- [使用 svg-sprite-loader、svgo-loader 优化 svg symbols](https://blog.csdn.net/Marker__/article/details/123913946)
